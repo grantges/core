@@ -77,9 +77,10 @@ var App = {
 	 *
 	 * @param {Controllers/String} _controller
 	 * @param {Object} _controllerArguments The arguments for the controller (optional)
+	 * @param {Boolean} _modal Flag to denote weather the controller should be opened as a modal window (optional, default=false)
 	 * @return {Controllers} Returns the new controller
 	 */
-	openScreen: function(_controller, _controllerArguments) {
+	openScreen: function(_controller, _controllerArguments, _modal) {
 		var controller = null;
 		
 		if(typeof _controller === "string") {
@@ -93,7 +94,8 @@ var App = {
 		// UI architecture keep the Views flexible.
 		controller.window = Ti.UI.createWindow({
 			backgroundColor: Alloy.CFG.windowBackgroundColor,
-			statusBarStyle: OS_IOS ? Ti.UI.iPhone.StatusBar.LIGHT_CONTENT : null
+			statusBarStyle: OS_IOS ? Ti.UI.iPhone.StatusBar.LIGHT_CONTENT : null,
+			modal: _modal || false
 		});
 		
 		controller.window.add(controller.wrapper);
